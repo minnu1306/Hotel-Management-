@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>List</title>
+  </head>
+	<body style="background-color:lightblue">
+		<h1 style="font-family:courier">Dashboard</h1>
+    <h3>ROOMS</h3>
+    <ol>
+    <li>Standard Non AC </li>
+      <ul>
+      {% for room in li_rnac%}
+      {% if room.occopied %}
+      <li style ="color:red"> {{room.roomno}}</li>
+
+      <form action="{% url 'vacatedrnac' room.id %}" method="POST" role="form">
+        {% csrf_token %}
+        <input type="radio" name="Status" value="Vacated">
+        <label for="Vacated">Vacate</label>
+        <input type="submit" value="submit">
+      </form>
+      {% else %}
+      <li style ="color:green"> {{room.roomno}}</li>
+      <form action="{% url 'bookedrnac' room.id %}" method="POST" role="form">
+        {% csrf_token %}
+        <input type="radio" name="Status" value="Booked">
+        <label for="Booked">Book</label>
+        <input type="submit" value="submit">
+      </form>
+
+      {% endif %}
+			{% endfor %}
+      </ul>
+    <li>Standard AC </li>
+      <ul>
+      {% for room in li_rac%}
+      {% if room.occopied %}
+      <li style ="color:red"> {{room.roomno}}</li>
+      <form action="{% url 'vacatedrac' room.id %}" method="POST" role="form">
+        {% csrf_token %}
+        <input type="radio" name="Status" value="Vacated">
+        <label for="Vacated">Vacate</label>
+        <input type="submit" value="submit">
+      </form>
+      {% else %}
+      <li style ="color:green"> {{room.roomno}}</li>
+      <form action="{% url 'bookedrac' room.id %}" method="POST" role="form">
+        {% csrf_token %}
+        <input type="radio" name="Status" value="Booked">
+        <label for="Booked">Book</label>
+        <input type="submit" value="submit">
+      </form>
+
+      {% endif %}
+      {% endfor %}
+      </ul>
+    <li>Deluxe AC  </li>
+      <ul>
+      {% for room in li_dac%}
+      {% if room.occopied %}
+      <li style ="color:red"> {{room.roomno}}</li>
+      <form action="{% url 'vacateddac' room.id %}" method="POST" role="form">
+        {% csrf_token %}
+        <input type="radio" name="Status" value="Vacated">
+        <label for="Vacated">Vacate</label>
+        <input type="submit" value="submit">
+      </form>
+      {% else %}
+      <li style ="color:green"> {{room.roomno}}</li>
+      <form action="{% url 'bookeddac' room.id %}" method="POST" role="form">
+        {% csrf_token %}
+        <input type="radio" name="Status" value="Booked">
+        <label for="Booked">Book</label>
+        <input type="submit" value="submit">
+      </form>
+
+      {% endif %}
+      {% endfor %}
+      </ul>
+    </ol>
+  </body>
+</html>
